@@ -1,11 +1,94 @@
-<html>
-<head>
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bewerbot</title>
+    <link rel="stylesheet" type="text/css" media="screen, projection" href="css/index.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/cookies.js"></script>
+  </head>
+  <body>
+    <div id="seite">
+      <div id="intro">
+        <div id="kopf">
+          <h1>Bewerbot</h1>
+          <p>
+            Andreas Sefzigs Bewerbungs-Bot.
+          </p>
+        </div>
+        <div id="formular">
+          Formular<br />
+          <input type="text" id="vorname"  value="<?=$_COOKIE["BewerbotVorname"];  ?>"><br />
+          <input type="text" id="nachname" value="<?=$_COOKIE["BewerbotNachname"]; ?>"><br />
+          <input type="text" id="email"    value="<?=$_COOKIE["BewerbotEmail"];    ?>"><br />
+          <input type="submit" value="Gespräch beginnen" onclick="chatStarten();" />
+        </div>
+      </div>
+      <div id="chat">
+        Chat
+      </div>
+    </div>
     <script src="https://cdn.smooch.io/smooch.min.js"></script>
     <script>
-        Smooch.init({appToken: '{{appToken}}' });
+       
+    /* Chat starten
+     * 
+     * Smooch Js-Dokumentation
+     * https://github.com/smooch/smooch-js
+     */ 
+       function chatStarten() {
+          
+          var bereit = false;
+          
+          var vorname =  $("#vorname").val();  if ((vorname == "")  || (vorname  == "Ihr Vorname"))         { vorname  = false; } else { Cookies.set('BewerbotVorname',  vorname); }
+          var nachname = $("#nachname").val(); if ((nachname == "") || (nachname == "Ihr Nachname"))        { nachname = false; } else { Cookies.set('BewerbotNachname', nachname); }
+          var email =    $("#email").val();    if ((email == "")    || (email    == "Ihre E-Mail-Adresse")) { email    = false; } else { Cookies.set('BewerbotEmail',    email); }
+          
+          if ((vorname) && (nachname) && (email)) { bereit = true; } else { alert("Bitte geben Sie alle Daten an."); }
+          
+          if (bereit) {
+             
+             Smooch.init({ 
+                appToken: '{{appToken}}',
+                givenName: vorname,
+                surname: nachname,
+                email: email,
+                customText: {
+                   headerText: 'Andreas Sefzigs Bewerbungs-Bot',
+                   inputPlaceholder: 'Schreiben Sie eine Nachricht...',
+                   sendButtonText: 'Absenden',
+                   introText: 'Dies ist der Anfang unseres Bewerbungsgesprächs.',
+                   settingsText: 'Hinterlassen Sie Ihre E-Mail-Adresse, damit ich Kontakt zu Ihnen aufnehmen kann.',
+                   settingsReadOnlyText: 'Ich schreibe Ihnen an diese E-Mail-Adresse, sollen wir uns verpasst haben.',
+                   settingsInputPlaceholder: 'Ihre E-Mail-Adresse',
+                   settingsSaveButtonText: 'Speichern',
+                   settingsHeaderText: 'E-Mail-Einstellungen',
+                   settingsNotificationText: 'Sollte ich Ihnen nicht schnell genug antworten, <a href data-ui-settings-link>hinterlassen Sie mir bitte Ihre E-Mail-Adresse</a>.',
+                   actionPaymentError: 'Es ist ein Fehler im Bezahlvorgang aufgetreten. <br> Bitte versuchen Sie es nochmal (oder mit einer anderen Karte).',
+                   actionPaymentCompleted: 'Bezahlvorgang abgeschlossen',
+                   messageError: 'Beim Versenden ist ein Fehler aufgetreten. Bitte versuchen Sie es nochmal.',
+                   invalidFileError: 'Es tut mir leid, zur Zeit können nur Bild-Dateien hochgeladen werden. Bitte laden Sie ein Jpg, Png, Gif oder Bmp hoch.',
+                   messageIndicatorTitleSingular: '({count}) neue Nachricht',
+                   messageIndicatorTitlePlural: '({count}) neue Nachrichten'
+                }
+             });
+             
+             Smooch.open();
+             
+          }
+          
+       }
+       
     </script>
-</head>
-<body>
-    <h2>SmoochBot Demo</h2>
-</body>
+    <?php
+       
+       $vorname =  $_COOKIE["BewerbotVorname"];
+       $nachname = $_COOKIE["BewerbotNachname"];
+       $email =    $_COOKIE["BewerbotEmail"];
+	   
+	   if (($vorname) && ($nachname) && ($email)) { echo '<script> chatStarten(); </script>'.PHP_EOL; }
+       
+    ?>
+  </body>
 </html>
