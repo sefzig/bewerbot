@@ -1,10 +1,10 @@
 {
-  "name": "Smooch Bot Example App",
-  "description": "Smooch Bot example using Express",
-  "keywords": ["smooch", "bot", "express"],
-  "website": "https://smooch.io",
-  "repository": "https://github.com/smooch/smooch-bot-example",
-  "logo": "https://node-js-sample.herokuapp.com/node.png",
+  "name": "Bewerbot",
+  "description": "Andreas Sefzigs Bewerbungs-Bot",
+  "keywords": ["sefzig", "bot", "smooch"],
+  "website": "http://sefzig.net/bot/bewerbot/",
+  "repository": "https://github.com/sefzig/bewerbot",
+  "logo": "http://sefzig.net/cdn/sefzignet/logo/700x700.png",
   "env": {
     "SMOOCH_APP_TOKEN": {
       "description": "Your Smooch app token which is used to initialize the web widget.",
