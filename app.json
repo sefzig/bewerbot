@@ -13,11 +13,13 @@
     },
     "SMOOCH_KEY_ID": {
       "description": "Your Smooch key ID, used to talk to the Smooch API",
-      "required": true
+      "required": true,
+      "value": "571728aac6faa733008c5a38"
     },
     "SMOOCH_SECRET": {
       "description": "Your Smooch secret, used to talk to the Smooch API",
-      "required": true
+      "required": true,
+      "value": "LZU5USOe0KNTm2lTsuYx_pbV"
     }
   }
 }
