@@ -8,7 +8,8 @@
   "env": {
     "SMOOCH_APP_TOKEN": {
       "description": "Your Smooch app token which is used to initialize the web widget.",
-      "required": true
+      "required": true,
+      "value": "cgbfkkwkuokarx1bmvvv6vdcl"
     },
     "SMOOCH_KEY_ID": {
       "description": "Your Smooch key ID, used to talk to the Smooch API",
