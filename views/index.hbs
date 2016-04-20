@@ -19,9 +19,9 @@
         </div>
         <div id="formular">
           Formular<br />
-          <input type="text" id="vorname"  value="<?=$_COOKIE["BewerbotVorname"];  ?>"><br />
-          <input type="text" id="nachname" value="<?=$_COOKIE["BewerbotNachname"]; ?>"><br />
-          <input type="text" id="email"    value="<?=$_COOKIE["BewerbotEmail"];    ?>"><br />
+          <input type="text" id="vorname"  value="Ihr Vorname"><br />
+          <input type="text" id="nachname" value="Ihr Nachname"><br />
+          <input type="text" id="email"    value="Ihre E-Mail-Adresse"><br />
           <input type="submit" value="Gespräch beginnen" onclick="chatStarten();" />
         </div>
       </div>
@@ -31,6 +31,32 @@
     </div>
     <script src="https://cdn.smooch.io/smooch.min.js"></script>
     <script>
+       
+    /* Anwendung starten
+     * 
+     */ 
+       $(document).ready(function(){
+          
+          formStarten();
+          
+       });
+       
+    /* Formular vorbereiten
+     * 
+     */ 
+       function formStarten() {
+          
+          var vorname = Cookies.get('BewerbotVorname');
+          var nachname = Cookies.get('BewerbotNachname');
+          var email = Cookies.get('BewerbotEmail');
+          
+          if (vorname) { $("#vorname").val(vorname); }
+          if (nachname) { $("#nachname").val(nachname); }
+          if (email) { $("#email").val(email); }
+          
+          if ((vorname) && (nachname) && (email)) { chatStarten(); }
+           
+       }
        
     /* Chat starten
      * 
@@ -50,7 +76,7 @@
           if (bereit) {
              
              Smooch.init({ 
-                appToken: '{{appToken}}',
+                appToken: 'cgbfkkwkuokarx1bmvvv6vdcl',
                 givenName: vorname,
                 surname: nachname,
                 email: email,
@@ -81,14 +107,5 @@
        }
        
     </script>
-    <?php
-       
-       $vorname =  $_COOKIE["BewerbotVorname"];
-       $nachname = $_COOKIE["BewerbotNachname"];
-       $email =    $_COOKIE["BewerbotEmail"];
-	   
-	   if (($vorname) && ($nachname) && ($email)) { echo '<script> chatStarten(); </script>'.PHP_EOL; }
-       
-    ?>
   </body>
 </html>
